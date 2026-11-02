@@ -9,7 +9,7 @@
     if ($dbhost == "" || $dbuser == "" || $dbpass == "" || $dbname == "") {
         echo "Database configuration is missing. Please check your .env file.";
     } else {
-        if ($dbport != "") {
+        if ($dbport) {
             $conn = new mysqli($dbhost, $dbuser, $dbpass, $dbname, $dbport);
         } else {
             $conn = new mysqli($dbhost, $dbuser, $dbpass, $dbname);

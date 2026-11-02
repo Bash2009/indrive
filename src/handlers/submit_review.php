@@ -18,7 +18,7 @@ if (!$user_id || $ride_id <= 0 || $rating < 1 || $rating > 5) {
     exit;
 }
 
-$stmt = $conn->prepare('SELECT id, rider_id, driver_id FROM rides WHERE id = ? AND status = "completed"');
+$stmt = $conn->prepare("SELECT id, rider_id, driver_id FROM rides WHERE id = ? AND status = 'completed'");
 $stmt->bind_param('i', $ride_id);
 $stmt->execute();
 $ride = $stmt->get_result()->fetch_assoc();

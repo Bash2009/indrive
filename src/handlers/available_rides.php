@@ -16,7 +16,7 @@ $vehicle_type = $_GET['type'] ?? 'economy';
 
 $radius_km = 50;
 
-$stmt = $conn->prepare('SELECT r.id, r.pickup_lat, r.pickup_lng, r.pickup_address, r.vehicle_type, r.distance_km, r.fare, r.requested_at FROM rides r WHERE r.status = "requested" AND r.vehicle_type = ? AND r.requested_at > DATE_SUB(NOW(), INTERVAL 30 MINUTE)');
+$stmt = $conn->prepare("SELECT r.id, r.pickup_lat, r.pickup_lng, r.pickup_address, r.vehicle_type, r.distance_km, r.fare, r.requested_at FROM rides r WHERE r.status = 'requested' AND r.vehicle_type = ? AND r.requested_at > DATE_SUB(NOW(), INTERVAL 30 MINUTE)");
 $stmt->bind_param('s', $vehicle_type);
 $stmt->execute();
 $result = $stmt->get_result();

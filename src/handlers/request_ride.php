@@ -33,7 +33,7 @@ if (!in_array($vehicle_type, ['economy', 'comfort', 'premium'], true)) {
     exit;
 }
 
-$stmt = $conn->prepare('SELECT id FROM rides WHERE rider_id = ? AND status IN ("requested", "accepted", "arriving", "in_progress")');
+$stmt = $conn->prepare("SELECT id FROM rides WHERE rider_id = ? AND status IN ('requested', 'accepted', 'arriving', 'in_progress')");
 $stmt->bind_param('i', $user_id);
 $stmt->execute();
 $stmt->store_result();
@@ -47,7 +47,7 @@ $stmt->close();
 $distance = haversine_km($pickup_lat, $pickup_lng, $dropoff_lat, $dropoff_lng);
 $fare = calculate_fare($distance, $vehicle_type);
 
-$stmt = $conn->prepare('INSERT INTO rides (rider_id, pickup_lat, pickup_lng, pickup_address, dropoff_lat, dropoff_lng, dropoff_address, vehicle_type, fare, distance_km, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, "requested")');
+$stmt = $conn->prepare("INSERT INTO rides (rider_id, pickup_lat, pickup_lng, pickup_address, dropoff_lat, dropoff_lng, dropoff_address, vehicle_type, fare, distance_km, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'requested')");
 $stmt->bind_param('iddsddssdd', $user_id, $pickup_lat, $pickup_lng, $pickup_address, $dropoff_lat, $dropoff_lng, $dropoff_address, $vehicle_type, $fare, $distance);
 
 if ($stmt->execute()) {

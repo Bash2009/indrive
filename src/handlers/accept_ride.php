@@ -17,7 +17,7 @@ if (!$user_id || $ride_id <= 0) {
     exit;
 }
 
-$stmt = $conn->prepare('SELECT id FROM driver_profiles WHERE user_id = ? AND status = "approved"');
+$stmt = $conn->prepare("SELECT id FROM driver_profiles WHERE user_id = ? AND status = 'approved'");
 $stmt->bind_param('i', $user_id);
 $stmt->execute();
 $driver = $stmt->get_result()->fetch_assoc();
@@ -30,7 +30,7 @@ if (!$driver) {
 
 $driver_id = $driver['id'];
 
-$stmt = $conn->prepare('SELECT id, status FROM rides WHERE id = ? AND status = "requested"');
+$stmt = $conn->prepare("SELECT id, status FROM rides WHERE id = ? AND status = 'requested'");
 $stmt->bind_param('i', $ride_id);
 $stmt->execute();
 $ride = $stmt->get_result()->fetch_assoc();
@@ -41,7 +41,7 @@ if (!$ride) {
     exit;
 }
 
-$stmt = $conn->prepare('UPDATE rides SET driver_id = ?, vehicle_id = ?, status = "accepted", accepted_at = NOW() WHERE id = ? AND status = "requested"');
+$stmt = $conn->prepare("UPDATE rides SET driver_id = ?, vehicle_id = ?, status = 'accepted', accepted_at = NOW() WHERE id = ? AND status = 'requested'");
 $stmt->bind_param('iii', $driver_id, $vehicle_id, $ride_id);
 $stmt->execute();
 $affected = $stmt->affected_rows;

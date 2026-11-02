@@ -32,7 +32,7 @@ if ($action === 'approve' || $action === 'suspend') {
         exit;
     }
 
-    $stmt = $conn->prepare('SELECT is_active FROM users WHERE id = ? AND role != "admin"');
+    $stmt = $conn->prepare("SELECT is_active FROM users WHERE id = ? AND role != 'admin'");
     $stmt->bind_param('i', $user_id);
     $stmt->execute();
     $user = $stmt->get_result()->fetch_assoc();

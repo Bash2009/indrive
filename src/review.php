@@ -13,9 +13,9 @@ if ($ride_id <= 0) {
 }
 
 if ($role === 'rider') {
-    $stmt = $conn->prepare('SELECT r.id, r.fare, r.pickup_address, r.dropoff_address, r.completed_at, u.first_name AS d_first, u.last_name AS d_last FROM rides r LEFT JOIN driver_profiles dp ON r.driver_id = dp.id LEFT JOIN users u ON dp.user_id = u.id WHERE r.id = ? AND r.rider_id = ? AND r.status = "completed"');
+    $stmt = $conn->prepare("SELECT r.id, r.fare, r.pickup_address, r.dropoff_address, r.completed_at, u.first_name AS d_first, u.last_name AS d_last FROM rides r LEFT JOIN driver_profiles dp ON r.driver_id = dp.id LEFT JOIN users u ON dp.user_id = u.id WHERE r.id = ? AND r.rider_id = ? AND r.status = 'completed'");
 } else {
-    $stmt = $conn->prepare('SELECT r.id, r.fare, r.pickup_address, r.dropoff_address, r.completed_at, u.first_name AS d_first, u.last_name AS d_last FROM rides r LEFT JOIN users u ON r.rider_id = u.id WHERE r.id = ? AND r.driver_id = (SELECT id FROM driver_profiles WHERE user_id = ?) AND r.status = "completed"');
+    $stmt = $conn->prepare("SELECT r.id, r.fare, r.pickup_address, r.dropoff_address, r.completed_at, u.first_name AS d_first, u.last_name AS d_last FROM rides r LEFT JOIN users u ON r.rider_id = u.id WHERE r.id = ? AND r.driver_id = (SELECT id FROM driver_profiles WHERE user_id = ?) AND r.status = 'completed'");
 }
 $stmt->bind_param('ii', $ride_id, $user_id);
 $stmt->execute();

@@ -16,7 +16,7 @@ if (!$user_id || $ride_id <= 0) {
     exit;
 }
 
-$stmt = $conn->prepare('SELECT id, status, rider_id FROM rides WHERE id = ? AND status IN ("requested", "accepted", "arriving")');
+$stmt = $conn->prepare("SELECT id, status, rider_id FROM rides WHERE id = ? AND status IN ('requested', 'accepted', 'arriving')");
 $stmt->bind_param('i', $ride_id);
 $stmt->execute();
 $ride = $stmt->get_result()->fetch_assoc();
@@ -46,7 +46,7 @@ if (!$is_rider && !$is_driver) {
 
 $cancelled_by = $is_rider ? 'rider' : 'driver';
 
-$stmt = $conn->prepare('UPDATE rides SET status = "cancelled", cancelled_at = NOW(), cancelled_by = ? WHERE id = ?');
+$stmt = $conn->prepare("UPDATE rides SET status = 'cancelled', cancelled_at = NOW(), cancelled_by = ? WHERE id = ?");
 $stmt->bind_param('si', $cancelled_by, $ride_id);
 $stmt->execute();
 $stmt->close();

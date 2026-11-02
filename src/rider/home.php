@@ -6,7 +6,7 @@ require_once __DIR__ . '/../config/fare.php';
 require_login();
 
 $user_id = $_SESSION['user_id'];
-$stmt = $conn->prepare('SELECT id FROM rides WHERE rider_id = ? AND status IN ("requested", "accepted", "arriving", "in_progress") ORDER BY id DESC LIMIT 1');
+$stmt = $conn->prepare("SELECT id FROM rides WHERE rider_id = ? AND status IN ('requested', 'accepted', 'arriving', 'in_progress') ORDER BY id DESC LIMIT 1");
 $stmt->bind_param('i', $user_id);
 $stmt->execute();
 $active = $stmt->get_result()->fetch_assoc();
