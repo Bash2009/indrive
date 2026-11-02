@@ -1,0 +1,59 @@
+/* ============================================
+   Indrive — Base (Tokens + Reset)
+   ============================================ */
+
+:root {
+  --id-void: #0A0A0F;
+  --id-surface: #12121A;
+  --id-border: #1E1E2A;
+  --id-indigo: #4F46E5;
+  --id-indigo-glow: rgba(79, 70, 229, 0.18);
+  --id-coral: #F43F5E;
+  --id-text: #E4E4E7;
+  --id-text-muted: #71717A;
+
+  --id-font-display: 'Space Grotesk', sans-serif;
+  --id-font-body: 'Inter', sans-serif;
+  --id-font-mono: 'IBM Plex Mono', monospace;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--id-font-body);
+  font-weight: 400;
+  color: var(--id-text);
+  background-color: var(--id-void);
+  min-height: 100vh;
+}
+
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 1rem;
+  z-index: 1000;
+  padding: 0.5rem 1rem;
+  background: var(--id-indigo);
+  color: #fff;
+  font-family: var(--id-font-body);
+  font-size: 0.875rem;
+  border-radius: 0 0 6px 6px;
+  text-decoration: none;
+  transition: top 0.2s;
+}
+
+.skip-link:focus {
+  top: 0;
+}
