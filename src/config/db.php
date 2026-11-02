@@ -3,12 +3,17 @@
     $dbuser = getenv("DB_USER");
     $dbpass = getenv("DB_PASSWORD");
     $dbname = getenv("DB_NAME");
+    $dbport = getenv("DB_PORT");
     $conn = null;
 
     if ($dbhost == "" || $dbuser == "" || $dbpass == "" || $dbname == "") {
         echo "Database configuration is missing. Please check your .env file.";
     } else {
-        $conn = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
+        if ($dbport != "") {
+            $conn = new mysqli($dbhost, $dbuser, $dbpass, $dbname, $dbport);
+        } else {
+            $conn = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
+        }
         if ($conn->connect_error) {
             die("Connection failed: " . $conn->connect_error);
         }
